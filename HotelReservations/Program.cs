@@ -40,13 +40,11 @@ namespace HotelReservations
             List<int> daysForReservation = CreateReservationDateRange(startDate, endDate);
 
             var reservedRoomNumbers = new List<Guid>();
-            var newReservation = new Reservation();
 
             using (var context = new ApplicationContext())
             {
                 var allRooms = context.Rooms;
                 GetNumberOfReservedRooms(daysForReservation, reservedRoomNumbers, context);
-
                 CreateReservation(startDate, endDate, ref isSuccessfulReservation, reservedRoomNumbers, context, allRooms);
                 context.SaveChanges();
             }
